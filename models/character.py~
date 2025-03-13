@@ -1,0 +1,14 @@
+class Character:
+    def __init__(self, name):
+        self.name = name
+        self.strength = 10
+        self.agility = 10
+        self.endurance = 10
+        self.luck = 10
+        self.hp = 100
+        self.exp = 0
+        self.exp_to_next_level = 100
+        self.min_damage = 10
+        self.max_damage = 20
+        self.equipment = []
+        self.skills = []
