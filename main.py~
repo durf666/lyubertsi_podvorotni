@@ -6,7 +6,7 @@ from aiogram.fsm.storage.memory import MemoryStorage
 
 from models.character import Character
 
-API_TOKEN = ''
+API_TOKEN = '7428809191:AAFL-3P-osdw67R8Y6njmSyJYi1Jbyjy6I8'
 
 # Инициализация хранилища и бота
 storage = MemoryStorage()  # Используем встроенное хранилище для FSM
