@@ -1,4 +1,5 @@
 from sqlite3 import Connection
+import random
 from models.location import Location
 
 def get_location_by_number(cursor, location_number):
@@ -16,3 +17,9 @@ def get_connected_locations(cursor, current_location_id):
         WHERE lc.location_id = ?
     ''', (current_location_id,))
     return cursor.fetchall()
+
+def get_random_enemy(cursor):
+    """Возвращает случайного противника из базы данных."""
+    cursor.execute('SELECT * FROM enemies')
+    enemies = cursor.fetchall()
+    return random.choice(enemies) if enemies else None

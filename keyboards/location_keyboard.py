@@ -2,11 +2,11 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 
 def get_location_keyboard(location):
+
     if location.type == 'combat':
         return InlineKeyboardMarkup(inline_keyboard=[
-            [InlineKeyboardButton(text="⚔️ Атаковать", callback_data="action_attack")],
-            [InlineKeyboardButton(text="🛡️ Защищаться", callback_data="action_defend")],
-            [InlineKeyboardButton(text="🏃‍♂️ Убежать", callback_data="action_flee")]
+            [InlineKeyboardButton(text="🔍 Идти глубже", callback_data="action_deeper")],
+            [InlineKeyboardButton(text="🚶‍♂️ Перейти в другую локацию", callback_data="action_move")]
         ])
     elif location.type == 'shop':
         return InlineKeyboardMarkup(inline_keyboard=[
