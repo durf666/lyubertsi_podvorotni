@@ -1,8 +1,11 @@
+import os
 import sqlite3
 
 def create_tables():
     # Подключаемся к базе данных (или создаем её, если она не существует)
-    conn = sqlite3.connect('game.db')
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    DB_PATH = os.path.join(BASE_DIR, 'game.db')
+    conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
 
     try:
@@ -62,11 +65,30 @@ def create_tables():
             );
         ''')
 
+        # Создаем таблицу для противников
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS enemies (
+                id INTEGER PRIMARY KEY,
+                name TEXT NOT NULL,
+                strength INTEGER NOT NULL,
+                agility INTEGER NOT NULL,
+                endurance INTEGER NOT NULL,
+                luck INTEGER NOT NULL,
+                hp INTEGER NOT NULL,
+                min_damage INTEGER NOT NULL,
+                max_damage INTEGER NOT NULL,
+                image TEXT,
+                description TEXT,
+                gold_reward INTEGER NOT NULL DEFAULT 0,
+                exp_reward INTEGER NOT NULL DEFAULT 0
+            );
+        ''')
+
         # Сохраняем изменения
         conn.commit()
-        print("Таблицы успешно созданы!")
+        print("Tables created successfully!")
     except sqlite3.Error as e:
-        print(f"Ошибка при создании таблиц: {e}")
+        print(f"Error creating tables: {e}")
     finally:
         # Закрываем соединение с базой данных
         conn.close()

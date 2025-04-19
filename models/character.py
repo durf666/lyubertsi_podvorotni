@@ -1,35 +1,24 @@
-class Character:
-    def __init__(self, user_id, name):
-        self.user_id = user_id
-        self.name = name
-        self.strength = 10
-        self.agility = 10
-        self.endurance = 10
-        self.luck = 10
-        self.hp = 100
-        self.exp = 0
-        self.exp_to_next_level = 100
-        self.min_damage = 10
-        self.max_damage = 20
-        self.equipment = []
-        self.skills = []
+from sqlalchemy import Column, Integer, String
+from models.base import Base
 
-    def save_to_db(self, cursor):
-        """Сохраняет данные персонажа в базу данных."""
-        cursor.execute('''
-            INSERT INTO characters (
-                user_id, name, strength, agility, endurance, luck, hp, exp, exp_to_next_level, min_damage, max_damage
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        ''', (
-            self.user_id,
-            self.name,
-            self.strength,
-            self.agility,
-            self.endurance,
-            self.luck,
-            self.hp,
-            self.exp,
-            self.exp_to_next_level,
-            self.min_damage,
-            self.max_damage
-        ))
+class Character(Base):
+    __tablename__ = 'characters'
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, unique=True, nullable=False)
+    name = Column(String, nullable=False)
+    strength = Column(Integer, default=10)
+    agility = Column(Integer, default=10)
+    endurance = Column(Integer, default=10)
+    luck = Column(Integer, default=10)
+    hp = Column(Integer, default=100)
+    exp = Column(Integer, default=0)
+    exp_to_next_level = Column(Integer, default=100)
+    level = Column(Integer, default=1)
+    min_damage = Column(Integer, default=10)
+    max_damage = Column(Integer, default=20)
+    money = Column(Integer, default=100)
+    current_location = Column(Integer, default=1)
+
+    def __repr__(self):
+        return f"<Character(id={self.id}, name={self.name}, level={self.level})>"
